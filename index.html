@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Praveenkumar K — Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --bg: #d3d3d3;
+      --panel: #e0e0e0;
+      --muted: #6b7280;
+      --accent: #1f6feb;
+      --accent-2: #0b84ff;
+      --shadow: rgba(16, 24, 40, 0.06);
+      --radius: 12px;
+    }
+
+
+    [data-theme="dark"] {
+      --bg: #0b1220;
+      --panel: #071127;
+      --muted: #98a0b3;
+      --text: #ffffff;
+      --accent: #56a0ff;
+      --accent-2: #63b3ff;
+      --shadow: rgba(2, 6, 23, 0.6);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--bg);
+      color: #0f1724;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .app {
+      display: grid;
+      color: var(--text);
+      grid-template-columns: 300px 1fr;
+      min-height: 100vh;
+      gap: 24px;
+      padding: 20px;
+    }
+
+    .sidebar {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
+      border-radius: var(--radius);
+      box-shadow: 0 8px 24px var(--shadow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      position: relative;
+      background: var(--panel);
+      padding: 28px 20px;
+    }
+
+    .profile-photo {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 6px solid #fff;
+      box-shadow: 0 8px 20px rgba(16, 24, 40, 0.08);
+      margin: 0 auto;
+    }
+
+    .profile-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .name {
+      color: var(--text);
+      font-weight: 700;
+      font-size: 20px;
+      margin-top: 6px;
+      text-align: center;
+    }
+
+    .role {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+
+    .sidebar .nav {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .nav button {
+      background: transparent;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      color: var(--muted);
+      text-align: left;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .nav button:hover {
+      background: rgba(0, 0, 0, 0.03);
+      color: var(--accent);
+    }
+
+    .side-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: auto;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .cv-btn {
+      background: var(--accent);
+      color: white;
+      padding: 10px 12px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .socials a {
+      color: var(--muted);
+      font-size: 18px;
+      margin-left: 10px;
+      transition: color 0.2s ease;
+    }
+
+    .socials a:hover {
+      color: var(--accent);
+    }
+
+    .theme-toggle {
+      position: absolute;
+      right: 14px;
+      top: 14px;
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 18px;
+      transition: color 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      color: var(--accent);
+    }
+
+    .main {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding: 0 12px;
+    }
+
+    .card {
+      background: var(--panel);
+      padding: 24px;
+      border-radius: var(--radius);
+      box-shadow: 0 8px 24px var(--shadow);
+    }
+
+    .hero {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .hero .intro {
+      flex: 1;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: 28px;
+      color: var(--accent);
+    }
+
+    .hero p {
+      color: var(--muted);
+      margin-top: 10px;
+      line-height: 1.5;
+      font-size: 16px;
+    }
+
+    .hero .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      background: var(--accent);
+      color: white;
+      max-width: 220px;
+      white-space: nowrap;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background: var(--accent-2);
+    }
+
+    .btn.secondary {
+      background: transparent;
+      color: var(--accent);
+      border: 2px solid rgba(15, 23, 36, 0.06);
+    }
+
+    .btn.secondary:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 18px;
+    }
+    .interest-card {
+      background: #d3d3d3;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(31, 111, 235, 0.07);
+      padding: 16px 12px;
+      text-align: center;
+      min-width: 80px;
+      max-width: 250px;
+      flex: 1 1 120px;
+      transition: box-shadow 0.2s;
+      cursor: default;
+    }
+
+    .interest-card:hover {
+      box-shadow: 0 8px 22px #6b728022;
+    }
+
+    .interest-card img {
+      width: 180px;
+      height: 180px;
+      margin-bottom: 10px;
+      object-fit: contain;
+    }
+
+    .interest-card div {
+      font-weight: 600;
+      color: #0b1220;
+      margin-top: 2px;
+      font-size: 15px;
+    }
+
+    .project {
+      border-radius: 12px;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), transparent);
+      cursor: pointer;
+      position: relative;
+      padding: 16px;
+      height: 180px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      transition: transform 0.25s ease, box-shadow 0.25s;
+      box-shadow: 0 6px 18px rgba(2, 6, 23, 0.06);
+    }
+
+    .project:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 30px rgba(2, 6, 23, 0.12);
+    }
+
+    .project .title {
+      font-weight: 700;
+      color: #08122a;
+    }
+
+    .project .meta {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .areas-of-interest {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 50px;
+      margin: 18px 0 12px 0;
+      justify-content: center;
+    }
+
+    .interest-card {
+      background: #d3d3d3;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(31, 111, 235, 0.07);
+      padding: 16px 12px;
+      text-align: center;
+      min-width: 80px;
+      max-width: 250px;
+      flex: 1 1 120px;
+      transition: box-shadow 0.2s;
+      cursor: default;
+    }
+
+    .interest-card:hover {
+      box-shadow: 0 8px 22px #6b728022;
+    }
+
+    .interest-card img {
+      width: 180px;
+      height: 180px;
+      margin-bottom: 10px;
+      object-fit: contain;
+    }
+
+    .interest-card div {
+      font-weight: 600;
+      color: #0b1220;
+      margin-top: 2px;
+      font-size: 15px;
+    }
+
+    [data-theme="dark"] .areas-of-interest {
+      background: transparent;
+    }
+
+    [data-theme="dark"] .interest-card {
+      background: #16213d;
+      color: #bee3f8;
+    }
+
+    [data-theme="dark"] .interest-card div {
+      color: #bee3f8;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+    }
+
+    .modal {
+      background: var(--panel);
+      width: 90%;
+      max-width: 760px;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 20px 60px rgba(2, 6, 23, 0.6);
+    }
+
+    .modal .close {
+      float: right;
+      background: transparent;
+      border: none;
+      font-size: 18px;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 18px;
+    }
+
+    .skills .skill {
+      margin-bottom: 12px;
+    }
+
+    .skill .label {
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .skill .bar {
+      height: 10px;
+      background: rgba(15, 23, 36, 0.06);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .skill .bar>i {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      width: 60%;
+    }
+
+    form input,
+    form textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(2, 6, 23, 0.06);
+      margin-top: 8px;
+      background: transparent;
+      color: inherit;
+    }
+
+    form button {
+      margin-top: 12px;
+    }
+
+    .small {
+      font-size: 13px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 6px;
+    }
+
+    @media (max-width: 900px) {
+      .app {
+        grid-template-columns: 1fr;
+        padding: 18px;
+        gap: 16px;
+      }
+
+      .sidebar {
+        flex-direction: row;
+        align-items: center;
+        padding: 12px;
+        gap: 12px;
+      }
+
+      .profile-photo {
+        width: 64px;
+        height: 64px;
+        border-width: 3px;
+      }
+
+      .name {
+        font-size: 16px;
+      }
+
+      .side-actions {
+        margin-top: 0;
+        gap: 6px;
+      }
+
+      .main {
+        margin-top: 8px;
+        padding: 0;
+      }
+
+      .split {
+        grid-template-columns: 1fr;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app" id="app" data-theme="light">
+    <aside class="sidebar card">
+      <button class="theme-toggle" title="Toggle theme" onclick="toggleTheme()">
+        <i class="fas fa-moon"></i>
+      </button>
+      <div class="profile-photo">
+        <img src="assets\Image\Praveen.jpg" alt="Profile photo" />
+      </div>
+      <div class="name">Praveenkumar K</div>
+      <div class="role"></div>
+      <nav class="nav" aria-label="Main navigation">
+        <button onclick="openSection('hero')"><i class="fas fa-home"></i> Home</button>
+        <button onclick="openSection('projects')"><i class="fas fa-briefcase"></i> Projects</button>
+        <button onclick="openSection('about')"><i class="fas fa-user-graduate"></i> About</button>
+        <button onclick="openSection('contact')"><i class="fas fa-envelope"></i> Contact</button>
+      </nav>
+      <div class="side-actions">
+        <a href="assets\Resume\PRAVEENKUMAR K.pdf" class="cv-btn" download><i
+            class="fas fa-download"></i> CV</a>
+        <div class="socials" aria-hidden>
+          <a href="https://www.linkedin.com/in/praveenkumar-k-a1511a270" target="_blank" title="LinkedIn"><i
+              class="fab fa-linkedin"></i></a>
+          <a href="mailto:praveenkumarmks631@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+          <a href="tel:+919600542376" title="Call"><i class="fas fa-phone"></i></a>
+        </div>
+      </div>
+    </aside>
+    <main class="main">
+      <section id="hero" class="card" data-section>
+        <div class="hero">
+          <div class="intro">
+            <h1>Hi — I’m <span style="color:var(--accent)">Praveenkumar</span></h1>
+            <p>
+              I am a creative and hardworking <strong>web developer</strong> with a Bachelor’s degree in Computer
+              Science from Anna University. As a fresher eager to build my career, I specialize in designing
+              user-centric websites with a strong focus on <strong>UI (User Interface)</strong> and <strong>UX (User
+                Experience)</strong>.<br><br />
+              My technical skillset includes <strong>HTML, CSS, JavaScript, SQL, and Python</strong>, alongside
+              proficiency in wireframing and prototyping tools like <strong>Figma</strong>. I enjoy crafting visually
+              appealing layouts and ensuring every page is intuitive, accessible, and responsive for all
+              users.<br /><br />
+              I am passionate about solving real-world problems through thoughtful design, always prioritizing clarity,
+              usability, and performance. My approach is to combine aesthetics with logic, making web experiences both
+              beautiful and practical.<br /><br />
+              I am a fast learner, team player, and excited to contribute my skills and creativity to new projects.
+              Beyond coding, my interests include stock trading, AI technology, and exploring innovative digital
+              solutions.<br /><br />
+              I’m ready for my next opportunity in web development and design!
+            </p>
+            <div class="hero-ctas">
+              <button class="btn" onclick="openSection('projects')">View Projects</button>
+              <button class="btn secondary" onclick="openSection('contact')">Contact Me</button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="projects" class="card" data-section style="display:none">
+        <h2>Selected Projects</h2>
+        <div class="grid" id="projectsGrid">
+          <div class="project" data-title="OnlineAutomobile" data-desc="A comprehensive automotive management system developed during my academic period using C#.Net and SQL. This project features both front-end and back-end components to provide a seamless user experience in vehicle inventory and sales management."
+            data-pdf="assets/Project doc/OnlineAutomobile.pdf" onclick="openModal(this)">
+            <div class="interest-card img"></div>
+           <img src="assets\Image\CustomBike.avif" alt="Web Development" />
+            <div class="title">OnlineAutomobile</div>
+            <div class="meta">C#.Net • Front and backend • SQL </div>
+          </div>
+          <div class="project" data-title="Portfolio Website" data-desc="A personal portfolio website built using modern web technologies including HTML, CSS, and JavaScript. It showcases my skills, projects, and certifications with a responsive and user-friendly design."
+            data-pdf="assets/Project doc/Portfolio Website.pdf" onclick="openModal(this)">
+            <div class="interest-card img"></div>
+           <img src="assets\Image\web development.avif" alt="Web Development" />
+            <div class="title">Portfolio Website</div>
+            <div class="meta">HTML • CSS • Javascript</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="card" data-section style="display:none">
+        <h2>About Me</h2>
+        <div class="split">
+          <div>
+            <p>I’m a frontend developer focused on building polished, accessible interfaces.</p>
+            <h3 style="margin-top:18px">Skills</h3>
+            <div class="skills">
+              <div class="skill">
+                <div class="label">HTML & CSS</div>
+                <div class="bar"><i style="width:90%"></i></div>
+              </div>
+              <div class="skill">
+                <div class="label">JavaScript</div>
+                <div class="bar"><i style="width:75%"></i></div>
+              </div>
+              <div class="skill">
+                <div class="label">Python</div>
+                <div class="bar"><i style="width:70%"></i></div>
+              </div>
+              <div class="skill">
+                <div class="label">SQL</div>
+                <div class="bar"><i style="width:70%"></i></div>
+              </div>
+              <div class="skill">
+                <div class="label">UI / Figma</div>
+                <div class="bar"><i style="width:65%"></i></div>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="margin-top: 20px;">
+            <h2>Education</h2>
+            <ul>
+              <li>
+                <strong><a href="https://maps.app.goo.gl/mmA2kibBMcj1hNZK8" target="_blank"
+                    style="color: var(--accent); text-decoration: none;">Bachelor of Computer Science – Karpagam
+                    University</a></strong>
+                (2022–2025)<br />CGPA: 7.24 / 10
+              </li>
+              <li>
+                <strong><a href="https://maps.app.goo.gl/hUdYqUuSXRwKmzGu5" target="_blank"
+                    style="color: var(--accent); text-decoration: none;">Higher Secondary – Akshaya Academy Matric
+                    Higher Secondary School</a></strong>
+                (2019–2020)<br />Percentage: 63.4%
+              </li>
+              <li>
+                <strong><a href="https://maps.app.goo.gl/hUdYqUuSXRwKmzGu5" target="_blank"
+                    style="color: var(--accent); text-decoration: none;">SSLC SCHOOL – Akshaya Academy Matric Higher
+                    Secondary School</a></strong>
+                (2021–2022)<br />Percentage: 65%
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 style="margin-top:32px;">Areas of Interest</h3>
+            <div class="areas-of-interest">
+              <div class="interest-card img">
+                <img src="assets\Image\web development.avif" alt="Web Development" />
+                <div>Web Development</div>
+              </div>
+              <div class="interest-card">
+                <img src="assets\Image\data analysis.webp" alt="Data Analysis" />
+                <div>Data Analysis</div>
+              </div>
+              <div class="interest-card">
+                <img src="assets\Image\UI UX Design.webp" alt="UI/UX Design" />
+                <div>UI/UX Design</div>
+              </div>
+              <div class="interest-card">
+                <img src="assets\Image\AI and Automation.webp" alt="AI Tools" />
+                <div>AI & Automation</div>
+              </div>
+            </div>
+          </div>
+
+            <div class="card" style="margin-top: 20px;">
+              <h2>Certifications</h2>
+              <ul>
+                <li><a href="#" onclick="showCert('assets/Image/genAI Powered Data analytics.jpg')">GenAI Powered Data Analytics</a></li>
+                <li><a href="#" onclick="showCert('assets/Image/C programming.jpg')">C Programming Language</a></li>
+              </ul>
+
+              <h2>Intenship</h2>
+              <ul>
+                <li><a href="#" onclick="showCert('assets/Programming on Python.jpg')">Programming on Python</a></li>
+                <li><a href="#" onclick="showCert('assets/Full Stack Development')">Full Stack Development</a></li>
+              </ul>
+
+            </div> 
+            
+
+
+            <div id="certModal"
+              style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.8); justify-content:center; align-items:center;">
+              <span onclick="closeCert()"
+                style="position:absolute; top:20px; right:30px; font-size:30px; color:white; cursor:pointer;">&times;</span>
+              <img id="certImg" src="" style="max-width:90%; max-height:90%;" />
+            </div>
+          </div>
+      </section>
+      <section id="contact" class="card" data-section style="display:none">
+        <h2>Contact</h2>
+        <form id="contactForm" onsubmit="submitForm(event)">
+          <label>Name</label>
+          <input type="text" id="name" placeholder="Your name" required />
+          <label>Email</label>
+          <input type="email" id="email" placeholder="you@example.com" required />
+          <label>Message</label>
+          <textarea id="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+          <button class="btn" type="submit">Send Message</button>
+        </form>
+        <div class="small">Or email me directly: <a href="mailto:praveenkumarmks631@gmail.com">praveenkumarmks631@gmail.com</a></div>
+      </section>
+      <div class="small">&copy; 2025 Praveenkumar K — Built with ♥</div>
+    </main>
+  </div>
+  <div class="modal-backdrop" id="modalBackdrop" onclick="closeModal(event)">
+    <div class="modal" role="dialog" aria-modal="true" onclick="event.stopPropagation()">
+      <button class="close" onclick="closeModal()">✕</button>
+      <h3 id="modalTitle">Project Title</h3>
+      <p id="modalDesc" style="color:var(--muted)"></p>
+      <div style="margin-top:12px">
+        <a href="#" class="btn" id="modalLink">View demo</a>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <script>
+    function openSection(id) {
+      document.querySelectorAll("[data-section]").forEach((s) => (s.style.display = "none"));
+      const el = document.getElementById(id);
+      if (el) el.style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    function openModal(card) {
+  const title = card.dataset.title || "Project";
+  const desc = card.dataset.desc || "";
+  const pdf = card.dataset.pdf || "#";
+  
+  document.getElementById("modalTitle").innerText = title;
+  document.getElementById("modalDesc").innerText = desc;
+  
+  const modalLink = document.getElementById("modalLink");
+  modalLink.href = pdf;
+  modalLink.target = "_blank";
+  modalLink.innerText = pdf === "#" ? "No Demo Available" : "View Demo";
+
+  document.getElementById("modalBackdrop").style.display = "flex";
+}
+
+    function closeModal() {
+      document.getElementById("modalBackdrop").style.display = "none";
+    }
+    function submitForm(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message").value.trim();
+      const subject = encodeURIComponent("Portfolio contact from " + name);
+      const body = encodeURIComponent(message + "\n\nFrom: " + name + " <" + email + ">");
+      const gmailUrl = 'https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox';
+      window.open(gmailUrl, "_blank");
+    }
+    function toggleTheme() {
+      const app = document.getElementById("app");
+      const current = app.getAttribute("data-theme");
+      app.setAttribute("data-theme", current === "light" ? "dark" : "light");
+    }
+    function showCert(src) {
+      const modal = document.getElementById("certModal");
+      const img = document.getElementById("certImg");
+      img.src = src ;
+      modal.style.display = "flex";
+
+
+    }
+    function closeCert() {
+      const modal = document.getElementById("certModal");
+      const img = document.getElementById("certImg");
+      modal.style.display = "none";
+      img.src = "";
+    }
+    document.addEventListener("DOMContentLoaded", () => {
+      openSection("hero");
+    });
+  </script>
+</body>
+
+</html>
